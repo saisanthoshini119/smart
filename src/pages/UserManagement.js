@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { 
   Users, 
-  Trash2, 
-  Edit, 
-  Plus,
-  Shield,
-  UserCheck
+  Plus
 } from 'lucide-react';
 
 const UserManagement = () => {
@@ -86,3 +82,4 @@ const UserManagement = () => {
 };
 
 export default UserManagement;
+

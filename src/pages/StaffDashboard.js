@@ -3,10 +3,8 @@ import axios from 'axios';
 import { 
   CheckCircle2, 
   Clock, 
-  MessageSquare, 
   Save,
-  User,
-  AlertCircle
+  User
 } from 'lucide-react';
 
 const StaffDashboard = () => {
@@ -155,3 +153,4 @@ const StaffDashboard = () => {
 };
 
 export default StaffDashboard;
+
