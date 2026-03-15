@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { 
-  ClipboardList, 
-  Filter,
-  UserPlus,
-  MoreVertical,
-  CheckCircle,
-  Clock
-} from 'lucide-react';
+// Icons import removed because none are used in this component.
 
 const AdminComplaints = () => {
   const [complaints, setComplaints] = useState([]);

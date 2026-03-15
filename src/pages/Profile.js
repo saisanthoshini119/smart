@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAuth } from '../context/AuthContext';
 import { User, Mail, Building, Save, Loader2, ShieldCheck } from 'lucide-react';
 
 const Profile = () => {
-  const { user, login } = useAuth();
   const [profile, setProfile] = useState({
     name: '',
     email: '',

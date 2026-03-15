@@ -13,8 +13,7 @@ import {
   Bell,
   ClipboardList,
   Check,
-  CheckCheck,
-  X
+  CheckCheck
 } from 'lucide-react';
 import axios from 'axios';
 

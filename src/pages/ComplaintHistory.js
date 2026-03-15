@@ -4,8 +4,7 @@ import {
   Search, 
   Filter, 
   ExternalLink,
-  Calendar,
-  MoreVertical
+  Calendar
 } from 'lucide-react';
 
 const ComplaintHistory = () => {

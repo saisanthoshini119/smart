@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { UserPlus, Mail, Lock, User, Building, UserCheck, Book } from 'lucide-react';
+import { UserPlus, Mail, Lock, User, UserCheck, Book } from 'lucide-react';
 
 const Register = () => {
   const [formData, setFormData] = useState({
