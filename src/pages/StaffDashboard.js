@@ -6,6 +6,7 @@ import {
   Save,
   User
 } from 'lucide-react';
+import BASE_URL from '../api';
 
 const StaffDashboard = () => {
   const [complaints, setComplaints] = useState([]);
@@ -21,7 +22,7 @@ const StaffDashboard = () => {
   const fetchAssigned = async () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      const res = await axios.get('http://localhost:8080/api/complaints', {
+      const res = await axios.get(`${BASE_URL}/complaints`, {
         headers: {
           'Authorization': `Bearer ${storedUser?.token}`
         }
@@ -42,7 +43,7 @@ const StaffDashboard = () => {
       formData.append('remarks', remarks);
       
       const storedUser = JSON.parse(localStorage.getItem('user'));
-      await axios.put(`http://localhost:8080/api/complaints/${selectedComplaint.id}/status`, formData, {
+      await axios.put(`${BASE_URL}/complaints/${selectedComplaint.id}/status`, formData, {
         headers: {
           'Authorization': `Bearer ${storedUser?.token}`
         }

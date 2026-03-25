@@ -4,6 +4,7 @@ import {
   Users, 
   Plus
 } from 'lucide-react';
+import BASE_URL from '../api';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -13,7 +14,7 @@ const UserManagement = () => {
     const fetchUsers = async () => {
       try {
         const storedUser = JSON.parse(localStorage.getItem('user'));
-        const res = await axios.get('http://localhost:8080/api/users/staff', {
+        const res = await axios.get(`${BASE_URL}/users/staff`, {
           headers: {
             'Authorization': `Bearer ${storedUser?.token}`
           }

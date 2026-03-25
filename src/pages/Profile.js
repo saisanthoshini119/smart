@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { User, Mail, Building, Save, Loader2, ShieldCheck } from 'lucide-react';
+import BASE_URL from '../api';
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -17,7 +18,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       try {
-        const res = await axios.get('http://localhost:8080/api/users/profile', {
+        const res = await axios.get(`${BASE_URL}/profile`, {
           headers: {
             'Authorization': `Bearer ${storedUser?.token}`
           }

@@ -13,6 +13,7 @@ import {
   X
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
+import BASE_URL from '../api';
 
 const StudentHome = () => {
   const { user } = useAuth();
@@ -33,7 +34,7 @@ const StudentHome = () => {
     const fetchComplaints = async () => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       try {
-        const res = await axios.get('http://localhost:8080/api/complaints', {
+        const res = await axios.get(`${BASE_URL}/complaints`, {
           headers: {
             'Authorization': `Bearer ${storedUser?.token}`
           }
@@ -64,7 +65,7 @@ const StudentHome = () => {
     setChatLoading(true);
     try {
       const res = await axios.post(
-        'http://localhost:8080/api/chat',
+        `${BASE_URL}/chat`,
         { messages: newMessages },
         { headers: { 'Authorization': `Bearer ${storedUser?.token}` } }
       );

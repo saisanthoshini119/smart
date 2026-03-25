@@ -6,6 +6,7 @@ import {
   ExternalLink,
   Calendar
 } from 'lucide-react';
+import BASE_URL from '../api';
 
 const ComplaintHistory = () => {
   const [complaints, setComplaints] = useState([]);
@@ -15,7 +16,7 @@ const ComplaintHistory = () => {
     const fetchComplaints = async () => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       try {
-        const res = await axios.get('http://localhost:8080/api/complaints', {
+        const res = await axios.get(`${BASE_URL}/complaints`, {
           headers: {
             'Authorization': `Bearer ${storedUser?.token}`
           }

@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 import { LogIn, Mail, Lock, ShieldCheck } from 'lucide-react';
+import BASE_URL from '../api';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:8080/api/auth/login', { email, password });
+      const res = await axios.post(`${BASE_URL}/login`, { email, password });
       login(res.data);
       navigate('/');
     } catch (err) {

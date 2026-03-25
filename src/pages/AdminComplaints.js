@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import BASE_URL from '../api';
 // Icons import removed because none are used in this component.
 
 const AdminComplaints = () => {
@@ -17,10 +18,10 @@ const AdminComplaints = () => {
     setLoading(true);
     try {
       const [complaintsRes, staffRes] = await Promise.all([
-        axios.get('http://localhost:8080/api/complaints', {
+        axios.get(`${BASE_URL}/complaints`, {
           headers: { 'Authorization': `Bearer ${storedUser?.token}` }
         }),
-        axios.get('http://localhost:8080/api/users/staff', {
+        axios.get(`${BASE_URL}/users/staff`, {
           headers: { 'Authorization': `Bearer ${storedUser?.token}` }
         })
       ]);

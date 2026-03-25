@@ -10,6 +10,7 @@ import {
   X,
   CheckCircle2
 } from 'lucide-react';
+import BASE_URL from '../api';
 
 const SubmitComplaint = () => {
   const [formData, setFormData] = useState({
@@ -56,7 +57,7 @@ const SubmitComplaint = () => {
 
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      await axios.post('http://localhost:8080/api/complaints', data, {
+      await axios.post(`${BASE_URL}/complaints`, data, {
         headers: { 
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${storedUser?.token}`

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { UserPlus, Mail, Lock, User, UserCheck, Book } from 'lucide-react';
+import BASE_URL from '../api';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/api/auth/register', formData);
+      await axios.post(`${BASE_URL}/register`, formData);
       navigate('/login');
     } catch (err) {
       setError(err.response?.data || 'Registration failed');
