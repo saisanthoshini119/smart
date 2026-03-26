@@ -8,6 +8,7 @@ const Profile = () => {
     name: '',
     email: '',
     department: '',
+    branch: '',
     role: ''
   });
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,7 @@ const Profile = () => {
     const fetchProfile = async () => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       try {
-        const res = await axios.get(`${BASE_URL}/profile`, {
+        const res = await axios.get(`${BASE_URL}/api/users/profile`, {
           headers: {
             'Authorization': `Bearer ${storedUser?.token}`
           }
@@ -41,14 +42,20 @@ const Profile = () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
 
     try {
-      const res = await axios.put('http://localhost:8080/api/users/profile', profile, {
+      const res = await axios.put(`${BASE_URL}/api/users/profile`, profile, {
         headers: {
           'Authorization': `Bearer ${storedUser?.token}`
         }
       });
       // Update local storage and auth context if needed
-      const updatedUser = { ...storedUser, name: res.data.name };
+      const updatedUser = {
+        ...storedUser,
+        name: res.data.name,
+        department: res.data.department,
+        branch: res.data.branch
+      };
       localStorage.setItem('user', JSON.stringify(updatedUser));
+      setProfile(res.data);
       // Note: We might need a proper refresh function in AuthContext, 
       // but for now, we'll just update the local state.
       setMessage({ type: 'success', text: 'Profile updated successfully!' });
@@ -146,7 +153,7 @@ const Profile = () => {
               <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '5px' }}>Email cannot be changed.</p>
             </div>
 
-            <div style={{ marginBottom: '30px' }}>
+            <div style={{ marginBottom: '20px' }}>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
                 <Building size={16} /> Department / Batch
               </label>
@@ -156,6 +163,19 @@ const Profile = () => {
                 value={profile.department}
                 onChange={(e) => setProfile({ ...profile, department: e.target.value })}
                 placeholder="e.g. Computer Science, 2024 Batch"
+              />
+            </div>
+
+            <div style={{ marginBottom: '30px' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px', fontSize: '0.875rem', color: 'var(--text-muted)' }}>
+                <Building size={16} /> Branch
+              </label>
+              <input
+                type="text"
+                className="input-field"
+                value={profile.branch || ''}
+                onChange={(e) => setProfile({ ...profile, branch: e.target.value })}
+                placeholder="e.g. CSE, ECE, Civil"
               />
             </div>
 

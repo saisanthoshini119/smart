@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { UserPlus, Mail, Lock, User, UserCheck, Book } from 'lucide-react';
+import { UserPlus, Mail, Lock, User, UserCheck, Book, Building } from 'lucide-react';
 import BASE_URL from '../api';
 
 const Register = () => {
@@ -23,10 +23,22 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${BASE_URL}/register`, formData);
+      await axios.post(`${BASE_URL}/api/auth/register`, formData);
       navigate('/login');
     } catch (err) {
-      setError(err.response?.data || 'Registration failed');
+      let errorMessage = 'Registration failed';
+      if (err.response?.data) {
+        if (typeof err.response.data === 'string') {
+          errorMessage = err.response.data;
+        } else if (err.response.data.message) {
+          errorMessage = err.response.data.message;
+        } else if (err.response.data.error) {
+          errorMessage = err.response.data.error;
+        } else {
+          errorMessage = JSON.stringify(err.response.data);
+        }
+      }
+      setError(errorMessage);
     }
   };
 
@@ -78,9 +90,27 @@ const Register = () => {
                   <option value="ADMIN">Admin</option>
                 </select>
               </div>
-              </div>
+            </div>
 
-            
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.875rem' }}>
+                Department
+              </label>
+              <div style={{ position: 'relative' }}>
+                <Building style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} size={16} />
+                <input
+                  name="department"
+                  type="text"
+                  className="input-field"
+                  style={{ paddingLeft: '36px' }}
+                  placeholder="Maintenance, Academics, Hostel..."
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '15px' }}>
             <div style={{ marginBottom: '15px' }}>
               <label style={{ display: 'block', marginBottom: '8px', fontSize: '0.875rem' }}>
                 Branch {formData.role === 'ADMIN' ? '(Optional)' : '(Required)'}

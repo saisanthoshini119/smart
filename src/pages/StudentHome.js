@@ -34,7 +34,7 @@ const StudentHome = () => {
     const fetchComplaints = async () => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       try {
-        const res = await axios.get(`${BASE_URL}/complaints`, {
+        const res = await axios.get(`${BASE_URL}/api/complaints`, {
           headers: {
             'Authorization': `Bearer ${storedUser?.token}`
           }
@@ -65,7 +65,7 @@ const StudentHome = () => {
     setChatLoading(true);
     try {
       const res = await axios.post(
-        `${BASE_URL}/chat`,
+        `${BASE_URL}/api/chat`,
         { messages: newMessages },
         { headers: { 'Authorization': `Bearer ${storedUser?.token}` } }
       );
@@ -120,7 +120,7 @@ const StudentHome = () => {
               <div key={c.id} style={{ padding: '15px', background: 'rgba(15, 23, 42, 0.4)', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <h4 style={{ fontSize: '1rem', marginBottom: '4px' }}>{c.title}</h4>
-                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>ID: {c.complaintId} • {c.category}</p>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>ID: {c.complaintId} | {c.category}</p>
                 </div>
                 <div style={{ 
                   padding: '6px 12px', 

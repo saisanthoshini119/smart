@@ -16,7 +16,7 @@ const ComplaintHistory = () => {
     const fetchComplaints = async () => {
       const storedUser = JSON.parse(localStorage.getItem('user'));
       try {
-        const res = await axios.get(`${BASE_URL}/complaints`, {
+        const res = await axios.get(`${BASE_URL}/api/complaints`, {
           headers: {
             'Authorization': `Bearer ${storedUser?.token}`
           }
@@ -39,6 +39,17 @@ const ComplaintHistory = () => {
       case 'RESOLVED': return 'var(--success)';
       case 'REJECTED': return 'var(--danger)';
       default: return 'var(--text-muted)';
+    }
+  };
+
+  const getStatusBackground = (status) => {
+    switch (status) {
+      case 'PENDING': return 'rgba(245, 158, 11, 0.12)';
+      case 'ASSIGNED': return 'rgba(79, 70, 229, 0.12)';
+      case 'IN_PROGRESS': return 'rgba(14, 165, 233, 0.12)';
+      case 'RESOLVED': return 'rgba(16, 185, 129, 0.12)';
+      case 'REJECTED': return 'rgba(239, 68, 68, 0.12)';
+      default: return 'rgba(148, 163, 184, 0.12)';
     }
   };
 
@@ -99,7 +110,7 @@ const ComplaintHistory = () => {
                     borderRadius: '999px', 
                     fontSize: '0.75rem', 
                     fontWeight: '600',
-                    background: `rgba(${getStatusColor(c.status).replace('var(', '').replace(')', '')}, 0.1)`, 
+                    background: getStatusBackground(c.status),
                     color: getStatusColor(c.status) 
                   }}>
                     <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: getStatusColor(c.status) }}></span>

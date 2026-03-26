@@ -34,7 +34,7 @@ const DashboardLayout = () => {
   const fetchUnreadCount = async () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      const res = await axios.get('http://localhost:8080/api/notifications/unread/count', {
+      const res = await axios.get('http://localhost:10000/api/notifications/unread/count', {
         headers: { 'Authorization': `Bearer ${storedUser?.token}` }
       });
       setUnreadCount(res.data);
@@ -46,7 +46,7 @@ const DashboardLayout = () => {
   const fetchNotifications = async () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      const res = await axios.get('http://localhost:8080/api/notifications', {
+      const res = await axios.get('http://localhost:10000/api/notifications', {
         headers: { 'Authorization': `Bearer ${storedUser?.token}` }
       });
       setNotifications(res.data);
@@ -65,7 +65,7 @@ const DashboardLayout = () => {
   const markAsRead = async (id) => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      await axios.put(`http://localhost:8080/api/notifications/${id}/read`, {}, {
+      await axios.put(`http://localhost:10000/api/notifications/${id}/read`, {}, {
         headers: { 'Authorization': `Bearer ${storedUser?.token}` }
       });
       setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
@@ -78,7 +78,7 @@ const DashboardLayout = () => {
   const markAllAsRead = async () => {
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      await axios.put('http://localhost:8080/api/notifications/read-all', {}, {
+      await axios.put('http://localhost:10000/api/notifications/read-all', {}, {
         headers: { 'Authorization': `Bearer ${storedUser?.token}` }
       });
       setNotifications(notifications.map(n => ({ ...n, read: true })));

@@ -57,7 +57,7 @@ const SubmitComplaint = () => {
 
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      await axios.post(`${BASE_URL}/complaints`, data, {
+      await axios.post(`${BASE_URL}/api/complaints`, data, {
         headers: { 
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${storedUser?.token}`

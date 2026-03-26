@@ -18,10 +18,10 @@ const AdminComplaints = () => {
     setLoading(true);
     try {
       const [complaintsRes, staffRes] = await Promise.all([
-        axios.get(`${BASE_URL}/complaints`, {
+        axios.get(`${BASE_URL}/api/complaints`, {
           headers: { 'Authorization': `Bearer ${storedUser?.token}` }
         }),
-        axios.get(`${BASE_URL}/users/staff`, {
+        axios.get(`${BASE_URL}/api/users/staff`, {
           headers: { 'Authorization': `Bearer ${storedUser?.token}` }
         })
       ]);
@@ -38,8 +38,7 @@ const AdminComplaints = () => {
     if (!staffId) return;
     const storedUser = JSON.parse(localStorage.getItem('user'));
     try {
-      // Need to stringify params or pass as URL query parameters
-      await axios.put(`http://localhost:8080/api/complaints/${complaintId}/assign?staffId=${staffId}`, {}, {
+      await axios.put(`${BASE_URL}/api/complaints/${complaintId}/assign?staffId=${staffId}`, {}, {
         headers: {
           'Authorization': `Bearer ${storedUser?.token}`
         }
