@@ -26,10 +26,19 @@ const Login = () => {
     setError('');
 
     try {
-      const res = await axios.post(`${BASE_URL}/api/auth/login`, {
-        email: email.trim(), 
-        password 
-      });
+      const res = await axios.post(
+        `${BASE_URL}/api/auth/login`,
+        {
+          email: email.trim(),
+          password
+        },
+        {
+          headers: {
+            // Prevent stale global auth headers from being sent during login.
+            Authorization: undefined
+          }
+        }
+      );
 
       // Assuming your backend returns user data + token
       login(res.data);
